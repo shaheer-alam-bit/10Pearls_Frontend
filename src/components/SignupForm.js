@@ -32,7 +32,7 @@ const SignupFrom = () => {
         error.response &&
         (error.response.status === 401 || error.response.status === 404)
       ) {
-        NotificationManager.error(error.response.data, "Error", 2000);
+        NotificationManager.error(error.response.data.message, "Error", 2000);
       } else {
         NotificationManager.error(
           "An unexpected error occurred",
@@ -46,7 +46,7 @@ const SignupFrom = () => {
   return (
     <div class="min-w-screen flex items-center justify-center px-5 py-5">
       <div
-        class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl overflow-hidden"
+        class="bg-gray-100 text-gray-500 rounded-3xl overflow-hidden"
         style={{ "max-width": "1000px" }}
       >
         <div class="md:flex w-full">
