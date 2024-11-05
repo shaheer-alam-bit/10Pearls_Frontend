@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CreateContactModal from "./CreateContactModal";
 import { MdDelete } from "react-icons/md";
 import DeleteContactModal from "./DeleteContactModal";
@@ -27,6 +27,7 @@ const ContactTable = ({
   const [searchedContacts, setSearchedContacts] = useState([]);
   const token = localStorage.getItem("token");
   const { user_id } = jwtDecode(token);
+  const fileInputRef = useRef(null);
 
   const searchContacts = async (name) => {
     setName(name);
@@ -113,6 +114,28 @@ const ContactTable = ({
     setUpdateContactModal(true);
   };
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("user_id", user_id);
+
+    try {
+      const res = await axios.post("http://localhost:8080/import", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.data.success === true) {
+        alert("Contacts imported successfully");
+      }
+    } catch (error) {
+      console.error("Error importing contacts:", error);
+    }
+  };
+  
   return (
     <>
       {contactToShow ? (
@@ -122,7 +145,15 @@ const ContactTable = ({
           <div class="relative mx-4 mt-4 text-gray-700 bg-white rounded-none bg-clip-border">
             <div class="flex items-center justify-end gap-8 mb-8">
               <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
+                <input
+                  type="file"
+                  accept=".vcf"
+                  className="hidden"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                />
                 <button
+                  onClick={() => fileInputRef.current.click()}
                   className="flex items-center gap-2 select-none rounded-lg border border-gray-900 py-2 px-4 text-center font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
                   type="button"
                 >
@@ -158,7 +189,7 @@ const ContactTable = ({
             </div>
             <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
               <div>
-                <p className="text-3xl font-bold text-gray-800 tracking-wide leading-tight">
+                <p className="text-3xl font-bold text-gray-800 tracking-wide leading-tight font-roboto">
                   Contacts Directory
                 </p>
               </div>
@@ -189,7 +220,6 @@ const ContactTable = ({
                           onClick={() => {
                             handleContactToShow(contact);
                             setDropdown(false);
-                            
                           }}
                           className="flex space-x-10 items-center p-2 border border-gray-200 hover:bg-gray-100 cursor-pointer"
                         >
@@ -227,22 +257,22 @@ const ContactTable = ({
               <thead className="bg-blue-600 text-white">
                 <tr>
                   <th class="p-4 transition-all border-y border-blue-gray-200 bg-blue-gray-100/70 hover:bg-blue-gray-200">
-                    <p class="flex items-center justify-between gap-2 font-sans text-sm antialiased leading-none text-blue-gray-900">
+                    <p class="flex items-center justify-between gap-2 font-roboto text-sm antialiased leading-none text-blue-gray-900">
                       Contact Name
                     </p>
                   </th>
                   <th class="p-4 transition-all border-y border-blue-gray-200 bg-blue-gray-100/70 hover:bg-blue-gray-200">
-                    <p class="flex items-center justify-between gap-2 font-sans text-sm antialiased leading-none text-blue-gray-900">
+                    <p class="flex items-center justify-between gap-2 font-roboto text-sm antialiased leading-none text-blue-gray-900">
                       Email
                     </p>
                   </th>
                   <th class="p-4 transition-all border-y border-blue-gray-200 bg-blue-gray-100/70 hover:bg-blue-gray-200">
-                    <p class="flex items-center justify-between gap-2 font-sans text-sm antialiased leading-none text-blue-gray-900">
+                    <p class="flex items-center justify-between gap-2 font-roboto text-sm antialiased leading-none text-blue-gray-900">
                       Phone Number
                     </p>
                   </th>
                   <th class="p-4 transition-all border-y border-blue-gray-200 bg-blue-gray-100/70 hover:bg-blue-gray-200">
-                    <p class="flex items-center justify-between gap-2 font-sans text-sm antialiased leading-none text-blue-gray-900">
+                    <p class="flex items-center justify-between gap-2 font-roboto text-sm antialiased leading-none text-blue-gray-900">
                       Actions
                     </p>
                   </th>
@@ -259,7 +289,7 @@ const ContactTable = ({
                           class="relative inline-block h-9 w-9 !rounded-full object-cover object-center"
                         />
                         <div class="flex flex-col">
-                          <p class="block font-sans text-md antialiased font-normal leading-normal text-blue-gray-900">
+                          <p class="block text-md antialiased font-normal leading-normal text-blue-gray-900 font-roboto">
                             {contact.title} {contact.firstName}{" "}
                             {contact.lastName}
                           </p>
@@ -268,14 +298,14 @@ const ContactTable = ({
                     </td>
                     <td class="p-4 border-b border-blue-gray-50">
                       <div class="flex flex-col">
-                        <p class="block font-sans text-md antialiased font-normal leading-normal text-blue-gray-900">
+                        <p class="block text-md antialiased font-normal leading-normal text-blue-gray-900 font-roboto">
                           {contact.personalEmail}
                         </p>
                       </div>
                     </td>
                     <td class="p-4 border-b border-blue-gray-50">
                       <div class="flex flex-col">
-                        <p class="block font-sans text-md antialiased font-normal leading-normal text-blue-gray-900">
+                        <p class="block font-roboto text-md antialiased font-normal leading-normal text-blue-gray-900">
                           {contact.personalPhoneNumber}
                         </p>
                       </div>
