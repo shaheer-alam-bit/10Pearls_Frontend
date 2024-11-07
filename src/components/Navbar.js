@@ -40,7 +40,9 @@ const Navbar = () => {
         </div>
         <div class="flex items-center space-x-2">
           <img className="h-10 w-auto" src={logo} alt="Logo" />
-          <span class="text-xl font-bold text-white font-roboto">Connectify</span>
+          <span class="text-xl font-bold text-white font-roboto">
+            Connectify
+          </span>
         </div>
         <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
           <li>
@@ -165,6 +167,10 @@ const Navbar = () => {
                 className="absolute right-0 z-10 mt-2 min-w-[180px] max-w-[calc(100vw-20px)] overflow-auto rounded-lg border border-slate-200 bg-white p-1.5 shadow-lg shadow-sm"
               >
                 <li
+                  onClick={() => {
+                    navigate("/MyProfile");
+                    setDropdown(false);
+                  }}
                   role="menuitem"
                   className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
                 >
