@@ -29,10 +29,11 @@ const ContactDetials = ({ contact, back }) => {
             <img
               src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg"
               class="w-full h-full rounded-tl-lg rounded-tr-lg"
+              alt="profile"
             />
           </div>
           <div class="flex flex-col items-center -mt-20">
-            <img src={avatar} class="w-40 border-4 border-white rounded-full" />
+            <img src={avatar} class="w-40 border-4 border-white rounded-full"  alt="profile"/>
             <div class="flex items-center space-x-2 mt-2">
               <p class="text-2xl">
                 {contact.title} {contact.firstName} {contact.lastName}

@@ -37,6 +37,7 @@ const CreateContactModal = ({ onClose }) => {
       if (response.data.success === true) {
         onClose();
         NotificationManager.success(response.data.message, "Success", 1000);
+        window.location.reload();
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
