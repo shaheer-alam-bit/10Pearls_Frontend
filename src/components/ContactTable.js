@@ -9,6 +9,7 @@ import axios from "axios";
 import { FaFileExport } from "react-icons/fa6";
 import { CiImport } from "react-icons/ci";
 import { jwtDecode } from "jwt-decode";
+import { NotificationManager, NotificationContainer } from "react-notifications";
 
 const ContactTable = ({
   contactsList,
@@ -129,13 +130,14 @@ const ContactTable = ({
         },
       });
       if (res.data.success === true) {
-        alert("Contacts imported successfully");
+        NotificationManager.success("Contacts imported successfully", "Success", 3000);
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error importing contacts:", error);
     }
   };
-  
+
   return (
     <>
       {contactToShow ? (
@@ -254,7 +256,7 @@ const ContactTable = ({
           </div>
           <div class="px-0">
             <table class="w-full mt-6 text-left table-auto min-w-max">
-              <thead className="bg-blue-600 text-white">
+              <thead className="bg-black text-white">
                 <tr>
                   <th class="p-4 transition-all border-y border-blue-gray-200 bg-blue-gray-100/70 hover:bg-blue-gray-200">
                     <p class="flex items-center justify-between gap-2 font-roboto text-sm antialiased leading-none text-blue-gray-900">
@@ -349,9 +351,24 @@ const ContactTable = ({
             </table>
           </div>
           <div class="flex items-center justify-between p-4 border-t border-blue-gray-50">
-            <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-              Page {pageDetails.currentPage + 1} of {pageDetails.totalPages}
+            <p class="block font-sans text-sm font-semibold leading-normal text-blue-gray-900 bg-blue-100 rounded-lg py-1 px-4 text-center shadow-md">
+              <span class="text-blue-700">
+                Page <strong>{pageDetails.currentPage + 1}</strong> of{" "}
+                <strong>{pageDetails.totalPages}</strong>
+              </span>
+              <span class="mx-2">•</span>
+              <span class="text-blue-700">
+                Showing Results: {"\t"}
+                <strong>
+                  {Math.min(
+                    pageDetails.totalItems,
+                    (pageDetails.currentPage + 1) * 5
+                  )}
+                </strong>
+                {"\t"} of <strong>{pageDetails.totalItems}</strong>
+              </span>
             </p>
+
             <div class="flex gap-2">
               <button
                 onClick={handlePrevPage}
@@ -388,6 +405,7 @@ const ContactTable = ({
           )}
         </div>
       )}
+      <NotificationContainer />
     </>
   );
 };

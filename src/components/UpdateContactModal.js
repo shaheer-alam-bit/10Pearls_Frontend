@@ -9,8 +9,8 @@ const UpdateContactModal = ({ contact, onClose }) => {
   const [updatedContact, setUpdatedContact] = useState(contact);
   const token = localStorage.getItem("token");
 
+
   const handleUpdateContact = async () => {
-    console.log(updatedContact);
     try {
       const response = await axios.post(
         `http://localhost:8080/updateContact/${updatedContact.id}`,
@@ -37,6 +37,7 @@ const UpdateContactModal = ({ contact, onClose }) => {
           2000
         );
         onClose();
+        window.location.reload();
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {

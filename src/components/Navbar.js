@@ -44,97 +44,6 @@ const Navbar = () => {
             Connectify
           </span>
         </div>
-        <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-          <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500" href="#">
-              Home
-            </a>
-          </li>
-          <li class="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              class="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
-          <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500 " href="#">
-              About Us
-            </a>
-          </li>
-          <li class="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              class="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
-          <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500" href="#">
-              Services
-            </a>
-          </li>
-          <li class="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              class="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
-          <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500" href="#">
-              Pricing
-            </a>
-          </li>
-          <li class="text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              class="w-4 h-4 current-fill"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-              />
-            </svg>
-          </li>
-          <li>
-            <a class="text-sm text-gray-400 hover:text-gray-500" href="#">
-              Contact
-            </a>
-          </li>
-        </ul>
         {showButtons ? (
           <>
             <a
@@ -189,7 +98,10 @@ const Navbar = () => {
                   <p className="text-slate-800 font-medium ml-2">My Profile</p>
                 </li>
                 <li
-                  onClick={() => setModal(true)}
+                  onClick={() => {
+                    setModal(true);
+                    setDropdown(false);
+                  }}
                   role="menuitem"
                   className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
                 >
@@ -261,50 +173,6 @@ const Navbar = () => {
                 ></path>
               </svg>
             </button>
-          </div>
-          <div>
-            <ul>
-              <li class="mb-1">
-                <a
-                  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
-                >
-                  Home
-                </a>
-              </li>
-              <li class="mb-1">
-                <a
-                  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
-                >
-                  About Us
-                </a>
-              </li>
-              <li class="mb-1">
-                <a
-                  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
-                >
-                  Services
-                </a>
-              </li>
-              <li class="mb-1">
-                <a
-                  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
-                >
-                  Pricing
-                </a>
-              </li>
-              <li class="mb-1">
-                <a
-                  class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded"
-                  href="#"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
           </div>
         </nav>
       </div>

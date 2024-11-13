@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { NotificationContainer, NotificationManager } from "react-notifications";
+import { useNavigate } from "react-router-dom";
 
 const ChangePasswordModal = ({ onClose }) => {
   const [oldPassword, setOldPassword] = useState("");
@@ -9,6 +10,7 @@ const ChangePasswordModal = ({ onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const token = localStorage.getItem("token");
   const { sub } = jwtDecode(token);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +32,7 @@ const ChangePasswordModal = ({ onClose }) => {
       if (response.data.success === true) {
         NotificationManager.success(response.data.message, "Success", 1000);
         onClose();
+        navigate("/")
       }
     } catch (error) {
       if (
