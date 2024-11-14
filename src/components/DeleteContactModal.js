@@ -25,6 +25,7 @@ const DeleteContactModal = ({ contact, onClose }) => {
       if (response.data.success === true) {
         NotificationManager.success(response.data.message, "Success", 2000);
         onClose();
+        window.location.reload();
       }
     } catch (error) {
       if (

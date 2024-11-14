@@ -40,7 +40,7 @@ const Navbar = () => {
         </div>
         <div class="flex items-center space-x-2">
           <img className="h-10 w-auto" src={logo} alt="Logo" />
-          <span class="text-xl font-bold text-white font-roboto">
+          <span class="text-3xl font-bold text-white font-roboto">
             Connectify
           </span>
         </div>

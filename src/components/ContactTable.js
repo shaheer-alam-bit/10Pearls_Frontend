@@ -9,7 +9,10 @@ import axios from "axios";
 import { FaFileExport } from "react-icons/fa6";
 import { CiImport } from "react-icons/ci";
 import { jwtDecode } from "jwt-decode";
-import { NotificationManager, NotificationContainer } from "react-notifications";
+import {
+  NotificationManager,
+  NotificationContainer,
+} from "react-notifications";
 
 const ContactTable = ({
   contactsList,
@@ -130,7 +133,11 @@ const ContactTable = ({
         },
       });
       if (res.data.success === true) {
-        NotificationManager.success("Contacts imported successfully", "Success", 3000);
+        NotificationManager.success(
+          "Contacts imported successfully",
+          "Success",
+          3000
+        );
         window.location.reload();
       }
     } catch (error) {
@@ -222,6 +229,7 @@ const ContactTable = ({
                           onClick={() => {
                             handleContactToShow(contact);
                             setDropdown(false);
+                            setName("");
                           }}
                           className="flex space-x-10 items-center p-2 border border-gray-200 hover:bg-gray-100 cursor-pointer"
                         >
@@ -300,8 +308,12 @@ const ContactTable = ({
                     </td>
                     <td class="p-4 border-b border-blue-gray-50">
                       <div class="flex flex-col">
-                        <p class="block text-md antialiased font-normal leading-normal text-blue-gray-900 font-roboto">
-                          {contact.personalEmail}
+                        <p class="cursor-pointer block text-md antialiased font-normal leading-normal text-blue-gray-900 font-roboto">
+                          <a
+                            className="text-blue-600"
+                          >
+                            {contact.personalEmail}
+                          </a>
                         </p>
                       </div>
                     </td>
